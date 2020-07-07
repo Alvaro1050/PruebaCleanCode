@@ -1,0 +1,19 @@
+{
+  "name": "masivian_clean_code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alvaro1050/PruebaCleanCode.git"
+  },
+  "author": "Alvaro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alvaro1050/PruebaCleanCode/issues"
+  },
+  "homepage": "https://github.com/Alvaro1050/PruebaCleanCode#readme"
+}

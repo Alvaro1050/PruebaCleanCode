@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  description: Measures MS
+tags:
+  - name: Devices
+    description: devices config and managment
+  - name: Channels
+    description: Sensors or actuators of a device
+  - name: Measure
+    description: reported value from device
+servers:
+  - url: /api/measures-ms
+components:
+  schemas:
+    MeasureRegisterSchema:
+      title: MeasureRegister
+      type: object
+      properties:
+        device_id:
+          type: string
+        value:
+          type: number
+      required:
+        - device_id
+        - value
+    ErrorResponseSchema:
+      title: ErrorResponse
+      type: object
+      properties:
+        error:
+          type: Object
+          properties:
+            message:
+              type: string
+            code:
+              type: integer
+paths:
+  /measures:
+    post:
+      tags:
+        - Measures
+      description: Register a measure from a channel device
+      produces:
+        - application/json
+      parameters:
+        - name: measure
+          description: measure Info
+          in: body
+          required: true
+          schema:
+            $ref: '#/components/schemas/MeasureRegisterSchema'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. Error in params
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: Entity not found.
+        5XX:
+          description: Unexpected error.
+  '/devices/:deviceId/measures':
+    get:
+      tags:
+        - Devices
+      description: Get all measures from a device
+      produces:
+        - application/json
+      parameters:
+        - name: deviceId
+          description: Device Id from get the mesasures to
+          in: path
+          required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. Error in params
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: Entity not found.
+        5XX:
+          description: Unexpected error.
+  '/devices/:deviceId/channels/:channel/measures/last':
+    get:
+      tags:
+        - Devices
+      description: Get the last measures from a channel device
+      produces:
+        - application/json
+      parameters:
+        - name: deviceId
+          description: Device Id to get
+          in: path
+          required: true
+        - name: channel
+          description: channel from device
+          in: path
+          required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request. Error in params
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: Entity not found.
+        5XX:
+          description: Unexpected error.

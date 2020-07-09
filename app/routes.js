@@ -1,15 +1,15 @@
 const express = require('express');
-const UsersController = require('./controllers/UsersController');
-const swaggerJsdoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-const SwaggerConfig = require('./config/SwaggerConfig');
+const RouletteController = require('./controllers/RouletteController');
+const BetController = require('./controllers/BetController');
 
-const swaggerSpec = swaggerJsdoc(SwaggerConfig.option);
 const router = express.Router();
 
-router.use('/api-docs', swaggerUi.serve);
-router.get('/api-docs', swaggerUi.setup(swaggerSpec));
+router.post('/roulette/save', RouletteController.saveRoullete);
+router.put('/roulette/:rouletteId(\\d+)/open', RouletteController.openRoullete);
+router.get('/roulette/all', RouletteController.getAllRoulette);
 
-router.post('/users/:applicationUserId(\\d+)', UsersController.save);
+router.post('/bet/save', BetController.saveBet);
+router.get('/bet/all', BetController.getAllBet);
+router.put('/bet/:rouletteId(\\d+)/disabled', BetController.disableBets);
 
 module.exports = router;

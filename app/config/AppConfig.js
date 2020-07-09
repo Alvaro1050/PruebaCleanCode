@@ -1,3 +1,3 @@
 module.exports = {
-  PREFIX: '/api/users-ms',
+  PREFIX: '/api/casino-ms',
 };
